@@ -31,6 +31,16 @@ mvn spring-boot:run
 
 The service starts on `http://localhost:8080`.
 
+## Run Tests
+
+Run the unit tests with:
+
+```bash
+mvn test
+```
+
+The tests cover pricing strategies, order building, atomic inventory reservation, and rollback when a multi-line order reservation fails.
+
 ## Features and How to Use Them
 
 ### Service Info
