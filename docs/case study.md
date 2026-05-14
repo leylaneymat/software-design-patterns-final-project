@@ -2,7 +2,23 @@
 
 ## Legacy Problem
 
-The imagined legacy version of this service placed catalog lookup, stock checks, payment selection, order persistence, supplier calls, and notifications inside a single `placeOrder` method. That method directly called a mock supplier API, used `if/else` blocks for payment types and discounts, and returned inconsistent errors. The result was tightly coupled code that was difficult to test and unsafe to extend.
+The legacy section was the order placement workflow. In the first design, one large `placeOrder` method was responsible for catalog lookup, stock checks, payment selection, order persistence, supplier calls, and notifications. The method directly called the mock supplier API, used `if/else` blocks for payment types and discounts, and returned inconsistent errors.
+
+Simplified legacy shape:
+
+```java
+public OrderResponse placeOrder(Request request) {
+    // find products
+    // check inventory
+    // call supplier API directly
+    // calculate discounts with if/else
+    // choose payment provider with if/else
+    // save order
+    // write audit log
+}
+```
+
+The result was tightly coupled code that was difficult to test and unsafe to extend. Adding a new payment method, pricing rule, or supplier integration required editing the central order method.
 
 ## Refactoring Steps
 

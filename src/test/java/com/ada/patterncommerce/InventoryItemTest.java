@@ -14,4 +14,14 @@ class InventoryItemTest {
         assertThat(item.reserve(2)).isFalse();
         assertThat(item.available()).isEqualTo(1);
     }
+
+    @Test
+    void releaseRestoresReservedQuantity() {
+        InventoryItem item = new InventoryItem("SKU-1", 3);
+
+        assertThat(item.reserve(2)).isTrue();
+        item.release(2);
+
+        assertThat(item.available()).isEqualTo(3);
+    }
 }

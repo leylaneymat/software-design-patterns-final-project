@@ -40,4 +40,11 @@ public class InventoryItem {
             }
         }
     }
+
+    public void release(int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("Release quantity must be positive");
+        }
+        available.addAndGet(quantity);
+    }
 }
